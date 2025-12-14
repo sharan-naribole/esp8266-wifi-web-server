@@ -1,0 +1,44 @@
+# Arduino IDE
+*.autosave
+*.bak
+*~
+*.swp
+*.swo
+*.tmp
+
+# Build artifacts
+build/
+*.elf
+*.bin
+*.hex
+*.eep
+*.lss
+*.sym
+*.map
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.code-workspace
+
+# Logs
+*.log
+
+# Credentials (safety)
+*credentials*
+*secret*
+*password*
+.env
+
+# Documentation build
+docs/_build/
