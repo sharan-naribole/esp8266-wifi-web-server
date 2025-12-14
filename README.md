@@ -1,4 +1,4 @@
-# ESP8266 Wi-Fi Web Server with Client Tracking
+# ESP8266 Wi-Fi based LED Control 
 
 ![Arduino](https://img.shields.io/badge/Arduino-00979D?style=flat&logo=Arduino&logoColor=white)
 ![ESP8266](https://img.shields.io/badge/ESP8266-000000?style=flat&logo=espressif&logoColor=white)
@@ -504,7 +504,6 @@ This project teaches:
 - ✅ Client metadata extraction (IP, User-Agent)
 - ✅ Circular buffer data structure
 - ✅ HTML/CSS/JavaScript integration with embedded systems
-- ✅ AJAX requests and auto-refresh mechanisms
 - ✅ GPIO control and active-low LED handling
 - ✅ Serial debugging and logging strategies
 - ✅ Memory optimization (PROGMEM usage)
