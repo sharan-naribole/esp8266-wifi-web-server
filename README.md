@@ -15,6 +15,7 @@ This project demonstrates a simplistic ESP8266 web server with client tracking c
 
 ### Key Features
 
+- ✅ **mDNS Support** - Access via `esp8266-wifi.local` instead of IP addresses
 - ✅ **Multi-Device Access** - Simultaneous connections from laptop, smartphone, tablet
 - ✅ **Client Tracking** - Real-time monitoring of client IP addresses and request history
 - ✅ **REST API** - JSON endpoints for status, LED control, and client data
@@ -65,7 +66,7 @@ This project demonstrates a simplistic ESP8266 web server with client tracking c
                               ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                    ESP8266 NodeMCU Web Server                           │
-│                      IP: 192.168.1.100                                  │
+│        IP: 192.168.1.100 | esp8266-wifi.local                          │
 │                                                                         │
 │  ┌───────────────────────────────────────────────────────────────────┐ │
 │  │                    HTTP Request Handler                           │ │
@@ -180,6 +181,11 @@ HTTP GET /led?state=on
 [WIFI] Signal:      -47 dBm
 [WIFI] --------------------------------
 
+[mDNS] Starting mDNS responder...
+[mDNS] ✓ mDNS responder started
+[mDNS] Access at: http://esp8266-wifi.local/
+[mDNS] --------------------------------
+
 [SERVER] Configuring web server...
 [SERVER] ✓ Web server started
 [SERVER] --------------------------------
@@ -259,6 +265,10 @@ HTTP GET /led?state=on
 
 5. **Access Web Interface**
    ```
+   Method 1 (mDNS - Recommended):
+   - Open browser: http://esp8266-wifi.local/
+
+   Method 2 (IP Address):
    - Open Serial Monitor (115200 baud)
    - Note the IP address (e.g., 192.168.1.100)
    - Open browser: http://192.168.1.100
@@ -273,6 +283,11 @@ HTTP GET /led?state=on
 #### `GET /`
 **Description**: Serve main HTML interface
 **Response**: `text/html`
+**Examples**:
+```
+http://esp8266-wifi.local/
+http://192.168.1.100/
+```
 
 #### `GET /led?state={on|off|toggle}`
 **Description**: Control built-in LED
@@ -282,6 +297,12 @@ HTTP GET /led?state=on
 **Response**: `text/plain`
 ```
 LED turned ON
+```
+
+**Examples**:
+```
+http://esp8266-wifi.local/led?state=on
+http://192.168.1.100/led?state=on
 ```
 
 #### `GET /status`
@@ -504,7 +525,6 @@ This project teaches:
 - ✅ Client metadata extraction (IP, User-Agent)
 - ✅ Circular buffer data structure
 - ✅ HTML/CSS/JavaScript integration with embedded systems
-- ✅ AJAX requests and auto-refresh mechanisms
 - ✅ GPIO control and active-low LED handling
 - ✅ Serial debugging and logging strategies
 - ✅ Memory optimization (PROGMEM usage)

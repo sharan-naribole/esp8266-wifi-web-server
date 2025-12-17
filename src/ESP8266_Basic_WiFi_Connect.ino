@@ -20,10 +20,10 @@
  * - Built-in LED on GPIO2 (D4) - already on the board!
  *
  * Web Interface:
- * - Homepage:     http://ESP8266_IP/
- * - LED ON:       http://ESP8266_IP/led?state=on
- * - LED OFF:      http://ESP8266_IP/led?state=off
- * - LED Toggle:   http://ESP8266_IP/led?state=toggle
+ * - Homepage:     http://esp8266-wifi.local/  (or http://ESP8266_IP/)
+ * - LED ON:       http://esp8266-wifi.local/led?state=on
+ * - LED OFF:      http://esp8266-wifi.local/led?state=off
+ * - LED Toggle:   http://esp8266-wifi.local/led?state=toggle
  *
  * @author  Sharan Naribole
  * @date    December 2025
@@ -32,6 +32,7 @@
 
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
+#include <ESP8266mDNS.h>
 #include "index.h"  // HTML web interface
 
 // ========================================
@@ -192,6 +193,9 @@ void loop() {
   // Handle incoming HTTP requests
   server.handleClient();
 
+  // Update mDNS
+  MDNS.update();
+
   // Optional: WiFi connection monitoring
   static unsigned long lastCheck = 0;
   if (millis() - lastCheck > 30000) {  // Check every 30 seconds
@@ -263,6 +267,16 @@ void setupWiFi() {
     Serial.print(WiFi.RSSI());
     Serial.println(" dBm");
     Serial.println("[WIFI] --------------------------------");
+
+    // Start mDNS responder
+    Serial.println("[mDNS] Starting mDNS responder...");
+    if (MDNS.begin("esp8266-wifi")) {
+      Serial.println("[mDNS] ✓ mDNS responder started");
+      Serial.println("[mDNS] Access at: http://esp8266-wifi.local/");
+      Serial.println("[mDNS] --------------------------------");
+    } else {
+      Serial.println("[mDNS] ✗ Error starting mDNS responder");
+    }
   } else {
     Serial.println("[WIFI] ✗ Connection Failed!");
     Serial.println("[WIFI] Troubleshooting:");
